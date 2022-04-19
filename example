@@ -1,4 +1,5 @@
-  diff_main: (pre, post) => {
+  const dmp = new DiffMatchPatch();
+  const diff_main = (pre, post) => {
     dmp.Diff_Timeout = 1;
     dmp.Diff_EditCost = 5;
     const diff = dmp.diff_main(pre ? pre : "", post ? post : "");
