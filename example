@@ -1,0 +1,25 @@
+  diff_main: (pre, post) => {
+    dmp.Diff_Timeout = 1;
+    dmp.Diff_EditCost = 5;
+    const diff = dmp.diff_main(pre ? pre : "", post ? post : "");
+    dmp.diff_cleanupSemantic(diff);
+     //dmp.diff_cleanupEfficiency(diff);
+    return diff.map((arr, i) => {
+      switch (arr[0]) {
+        case -1 :
+          if (arr[1] === " " ){
+            return <Text key={"e"+i}>{arr[1]}</Text>
+          } else {
+            return <Text key={"d"+i} style={[styles.del, {backgroundColor: Utils.colors().diffDel}]}>{arr[1]}</Text>
+          }
+        case 1:
+          if (arr[1] === " " ){
+            return <Text key={"e"+i}>{arr[1]}</Text>
+          } else {
+            return <Text key={"a"+i} style={[styles.add, {backgroundColor: Utils.colors().diffAdd}]}>{arr[1]}</Text>
+          }
+        default:
+          return <Text key={"e"+i}>{arr[1]}</Text>
+      }
+    });
+  },
